@@ -1,0 +1,99 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "create_schema",
+        "author": "ngoswami",
+        "changes": [
+          {
+            "sql": {
+              "sql": "CREATE SCHEMA device"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "create_table",
+        "author": "ngoswami",
+        "changes": [
+          {
+            "createTable": {
+              "columns": [
+                {
+                  "column": {
+                    "name": "device_name",
+                    "type": "varchar(255)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "device_id",
+                    "type": "int"
+                  }
+                }
+              ],
+              "schemaName": "device",
+              "tableName": "devices"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "create_schema_user",
+        "author": "ngoswami",
+        "changes": [
+          {
+            "sql": {
+              "sql": "CREATE SCHEMA users"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "create_table_user_permissions",
+        "author": "ngoswami",
+        "changes": [
+          {
+            "createTable": {
+              "columns": [
+                {
+                  "column": {
+                    "name": "user_id",
+                    "type": "varchar(255)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "user_access",
+                    "type": "varchar(255)"
+                  }
+                }
+              ],
+              "schemaName": "users",
+              "tableName": "user_permissions"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "create_master_user",
+        "author": "ngoswami",
+        "changes": [
+          {
+            "sql": {
+              "sql": "INSERT INTO users.user_permissions (user_id, user_access) VALUES ('1','get_devices')"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
