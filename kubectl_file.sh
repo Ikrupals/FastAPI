@@ -3,24 +3,24 @@ deploymentYaml=$(cat <<EOF
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fastapi-deployment
-  labels:
-	app: fastapi
+  name: apis-service
 spec:
   replicas: 1
   selector:
-	matchLabels:
-	  app: fastapi
+    matchLabels:
+      app: apis-service
   template:
-	metadata:
-	  labels:
-		app: fastapi
-	spec:
-	  containers:
-	  - name: fastapi
-		image: $1/$2:$3
-		ports:
-		- containerPort: 8000
+    metadata:
+      labels:
+        app: apis-service
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: order-service
+	image: $1/$2:$3
+        ports:
+        - containerPort: 8000
 EOF
 )
 
@@ -29,15 +29,15 @@ serviceYaml=$(cat <<EOF
 apiVersion: v1
 kind: Service
 metadata:
-  name: fastapi-service
+  name: apis-service
 spec:
-  selector:
-	app: fastapi
-  ports:
-	- protocol: TCP
-	  port: 8000
-	  targetPort: 8000
   type: LoadBalancer
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8000
+  selector:
+    app: apis-service
 EOF
 )
 if [ -e deployment.yml ]
