@@ -40,20 +40,20 @@ spec:
     app: apis-service
 EOF
 )
-if [ -e deployment.yml ]
+if [ -e deployment.yaml ]
 then
-	rm -rf deployment.yml
+	rm -rf deployment.yaml
 fi
-if [ -e service.yml ]
+if [ -e service.yaml ]
 then
-	rm -rf service.yml
+	rm -rf service.yaml
 fi
 
-echo "$deploymentYaml" > deployment.yml
-echo "$serviceYaml" > service.yml
-kubectl apply -f deployment.yml
-kubectl apply -f service.yml
+echo "$deploymentYaml" > deployment.yaml
+echo "$serviceYaml" > service.yaml
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
 sleep 50
 kubectl delete all --all
-# rm deployment.yml
-# rm service.yml
+# rm deployment.yaml
+# rm service.yaml
