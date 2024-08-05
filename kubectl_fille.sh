@@ -20,7 +20,7 @@ spec:
 	  - name: fastapi
 		image: $1/$2:$3
 		ports:
-		- containerPort: 8082
+		- containerPort: 8000
 EOF
 )
 
@@ -35,8 +35,8 @@ spec:
 	app: fastapi
   ports:
 	- protocol: TCP
-	  port: 8082
-	  targetPort: 8082
+	  port: 8000
+	  targetPort: 8000
   type: LoadBalancer
 EOF
 )
