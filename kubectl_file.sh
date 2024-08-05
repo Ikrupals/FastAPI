@@ -54,5 +54,5 @@ echo "$serviceYaml" > service.yml
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 sleep 50
-kubectl destroy
+kubectl delete all --all
 
